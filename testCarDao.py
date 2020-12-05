@@ -1,30 +1,73 @@
 from CarDao import carDao
 
+supplier1 = {
+    'name': 'Barry Clarke',
+    'location': 'Dundalk',
+    'phone': 42_9312345
+}
+
+supplier2 = {
+    'name': 'Jimmy Murphy',
+    'location': 'Swords',
+    'phone': 1_6534271
+}
+
 car1 = {
-    'reg': '2019-D-1234',
+    'kind': 'new',
+    'chassisID': '1234567',
     'manu_code': 'TOY',
-    'mileage': 8045,
-    'price': 23500,
+    'manu_model': 'Corolla',
+    'year': 2020,
+    'mileage': 0,
+    'price': 35000,
     'colour': 'silver',
-    'fuel': 'petrol'
+    'fuel': 'petrol',
+    'supplierID': 1
 }
 
 car2 = {
-    'reg': '2018-D-12522',
+    'kind': 'new',
+    'chassisID': '1234567',
     'manu_code': 'TOY',
-    'mileage': 16398,
-    'price': 20500,
+    'manu_model': 'Avensis',
+    'year': 2020,
+    'mileage': 0,
+    'price': 42000,
     'colour': 'blue',
-    'fuel': 'petrol'
+    'fuel': 'petrol',
+    'supplierID': 1
+}
+
+car3 = {
+    'kind': 'new',
+    'chassisID': '1234567',
+    'manu_code': 'TOY',
+    'manu_model': 'Yaris',
+    'year': 2020,
+    'mileage': 0,
+    'price': 18000,
+    'colour': 'Yellow',
+    'fuel': 'petrol',
+    'supplierID': 2
 }
 
 
-#returnvalue = carDao.create(car1)
-returnvalue = carDao.getAll()
-print("Get All")
-print(returnvalue)
-#returnvalue = carDao.findById(car2['reg'])
-#print("Find By Id")
+
+
+#returnvalue = carDao.createSupplier(supplier1)
+#returnvalue = carDao.createSupplier(supplier2)
+
+#print("Get All Suppliers")
+#returnvalue = carDao.getAllSupplier()
+#print(returnvalue)
+#returnvalue = carDao.createCar(car1)
+returnvalue = carDao.createCar(car2)
+#returnvalue = carDao.createCar(car3)
+#returnvalue = carDao.getAllCar()
+#print("Get All Cars")
+#print(returnvalue)
+#returnvalue = carDao.findByModel(car2['manu_model'])
+#print("Find By car Model")
 #print(returnvalue)
 #returnvalue = carDao.delete(car1['reg'])
 #print(returnvalue)
