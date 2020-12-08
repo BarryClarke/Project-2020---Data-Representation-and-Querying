@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<!-- Homepage -->
+	<title>Home</title>
+
+	<!-- Include the jQuery library-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<!-- Include Bootstrap-->
+	<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+	
+	<!-- CSS Code -->
+	<style type="text/CSS">	
+		/* quote div positioned and styled */
+		.quote{
+			float: left;
+			width: 75%;
+			height: 200px;
+			padding: 20px;
+			margin: 0px 20px 0px 0px;
+            /*background-color: black;*/
+			color: #f40b03;
+			text-align: justify;}
+	
+		/* carparkPic div positioned to the RHS using float */
+		.carparkPic{
+			float: left;
+            /*background-color: blue;*/
+            margin-top: 20px;
+			width: 16%;
+			height: 100px;}
+	 
+		/* caption is placed beneath the carparkPic on the RHS */
+		.caption{
+			text-align: center;
+            background-color: green;
+			font-family: Calibri;
+			font-size: 80%;
+			width: 100%;
+			color: green;}
+		
+		/* intro contains the main body text of the page. Positioned beneath quote using clear */
+		.display{
+			clear: left;
+            /*background-color: brown;*/
+			width: 95%;
+			padding: 10px 20px;
+			font-family: Arial;
+			text-align: justify;}
+
+		h3, ul, p{
+			font-family: Calibri;
+			font-size: 150%;}
+		
+					
+	</style>
+	</head>
+	<body>
+		<!-- Page header and links to all sub pages -->
+    	<img src="Images/Logo.PNG" alt="Logo" Width="50%"><br/>
+		<a href="index.html"><img src="Buttons/homeButton.jpg" alt="Homepage" Width="24%"></a>
+		<!-- Onclick below demonstrates use of events -->
+		<a href="sales.html" onclick="return confirm('Please Login')"><img src="Buttons/salesButton.jpg" alt="Sales" Width="24%"></a>
+		<a href="admin.html" onclick="return confirm('Please Login')"><img src="Buttons/adminButton.jpg" alt="Administration" Width="24%"></a>
+		<a href="contact.html"><img src="Buttons/contactButton.jpg" alt="Contact" Width="24%"></a>
+		<hr/>
+
+		<!-- Create a div to edit and position the quote using CSS contained in Head -->
+		<div class="quote">
+			<h3><i>"Please feel free to contact any of our below suppliers for further information. To create, edit or delete suppliers from the list, please use the Administrator password"</i></h3>
+		</div>
+	
+    	<!-- Create a div to position carparkPic using using float in CSS contained in Head -->
+    	<div class="carparkPic">
+			<a href="Home.html" onclick="return confirm('Please Login')"><img src="Images/carParkpic.jpg" alt="carpark" width="100%" title="carpark"></a> 	
+		</div>
+	
+		<!-- Create a div to position intro using using clear in CSS contained in Head -->
+		<div class="display">
+			<table class="table" id="supplierTable">
+            	<tr>
+                	<th>Supplier</th><th>Location</th><th>Phone</th>
+            	</tr>
+			   </table>
+		</div>
+
+		<script>
+			
+    		// Function that uses AJAX to call to the restful API (restserver.py) and complete method/function
+			
+    		function getAll(){
+        		$.ajax({
+            		"url": "http://127.0.0.1:5000/suppliers", //This url is used to call a specific function in the restfull API
+            		"method": "GET",
+            		"data": "",
+            		"dataType": "JSON",
+            		"success":function(results){
+                		for (supplier of results)
+                    		addSupplierToTable(supplier) // Call a function to add supplier to the table
+            		},
+            		"error":function(xhr, status, error){
+                		console.log("error:"+status+" msg: "+error)
+            		}
+        		});
+    		}
+
+    		// Function to add new car to the table
+    		function addSupplierToTable(supplier){
+				
+        		var tableElement = document.getElementById('supplierTable') // Declare a variable tableElement which is the carTable
+        		var rowElement = tableElement.insertRow(-1) // Declare a variable rowElement which is a new row at the end (-1) of the table
+
+        		rowElement.id = supplier.name
+        		var cell1 = rowElement.insertCell(0) // Declare and insert a cell as the 1st cell in the row
+        		cell1.innerHTML = supplier.name // In this cell, assign what is stored in the supplier object for "name"
+        		var cell2 = rowElement.insertCell(1) // Declare and insert a cell as the 2nd cell in the row
+        		cell2.innerHTML = supplier.location // In this cell, assign what is stored in the supplier object for "location"
+        		var cell3 = rowElement.insertCell(2) // Declare and insert a cell as the 3rd cell in the row
+                cell3.innerHTML = supplier.phone // In this cell, assign what is stored in the supplier object for "phone"	
+    		}
+
+			getAll()
+			//console.log("Working so far")
+		</script>
+	</body>
+</html>

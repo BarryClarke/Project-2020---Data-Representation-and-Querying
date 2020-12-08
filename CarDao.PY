@@ -45,13 +45,13 @@ class CarDao:
     
     def getAllCar(self):
         cursor = self.db.cursor()
-        sql = "select * from cars"
+        sql = "select cars.*, suppliers.name, suppliers.location, suppliers.phone from cars INNER JOIN suppliers on cars.supplierID = suppliers.supplierID"
         cursor.execute(sql)
         results = cursor.fetchall()
         returnArray = []
         #print(results) # This is an array of tuples
         for result in results:
-            resultAsDict = self.convertToDictCar(result)
+            resultAsDict = self.convertToDictCar1(result)
             returnArray.append(resultAsDict)
         return returnArray # This will be an array of dict objects
     
@@ -210,6 +210,18 @@ class CarDao:
                 value = result[i]
                 car[colName] = value
         return car
+    
+    # function to convert a tuple to a dict object for the cars table
+    def convertToDictCar1(self, result):
+        colnames = ['cid', 'kind', 'chassisID', 'manu_code', 'manu_model', 'year', 'mileage', 'price', 'colour', 'fuel', 'supplierID', 'name', 'location', 'phone']
+        car = {}
+
+        if result:
+            for i, colName in enumerate(colnames):
+                value = result[i]
+                car[colName] = value
+        return car
+
 
 
 

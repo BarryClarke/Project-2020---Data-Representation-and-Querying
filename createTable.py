@@ -23,13 +23,13 @@ sql="CREATE TABLE cars (`cid` int NOT NULL AUTO_INCREMENT,\
 `manu_code` varchar(3) DEFAULT NULL,\
 `manu_model` varchar(12) DEFAULT NULL,\
 `year` int DEFAULT NULL,\
-`mileage` date DEFAULT NULL,\
+`mileage` int DEFAULT NULL,\
 `price` int NOT NULL,\
 `colour` varchar(20) DEFAULT NULL,\
 `fuel` enum('petrol','diesel') DEFAULT NULL,\
 `supplierID` int NOT NULL,\
 PRIMARY KEY (`cid`), KEY `supplierID` (`supplierID`),\
-CONSTRAINT `cars_ibfk_1` FOREIGN KEY (`supplierID`) REFERENCES `suppliers` (`supplierID`))"
+CONSTRAINT `cars_ibfk_1` FOREIGN KEY (`supplierID`) REFERENCES `suppliers` (`supplierID`) ON DELETE CASCADE)"
 cursor.execute(sql)
 
  
