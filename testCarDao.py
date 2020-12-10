@@ -12,6 +12,12 @@ supplier2 = {
     'phone': 1_6534271
 }
 
+supplier2 = {
+    'name': 'Johy Murphy',
+    'location': 'Drogheda',
+    'phone': 41_9256381
+}
+
 car1 = {
     'kind': 'new',
     'chassisID': '1234567',
@@ -39,17 +45,32 @@ car2 = {
 }
 
 car3 = {
-    'kind': 'new',
+    'kind': 'used',
     'chassisID': '1234567',
-    'manu_code': 'TOY',
-    'manu_model': 'Yaris',
-    'year': 2020,
-    'mileage': 0,
-    'price': 18000,
-    'colour': 'Yellow',
+    'manu_code': 'FOR',
+    'manu_model': 'Focus',
+    'year': 2018,
+    'mileage': 18354,
+    'price': 10000,
+    'colour': 'Black',
+    'fuel': 'Petrol',
+    'supplierID': 3
+}
+
+car4 = {
+    'kind': 'used',
+    'chassisID': '1234567',
+    'manu_code': 'FOR',
+    'manu_model': 'Focus',
+    'year': 2019,
+    'mileage': 11000,
+    'price': 15000,
+    'colour': 'black',
     'fuel': 'petrol',
     'supplierID': 2
 }
+
+
 
 
 

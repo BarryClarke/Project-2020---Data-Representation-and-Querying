@@ -1,7 +1,9 @@
-from flask import Flask, url_for, request, abort, jsonify
+from flask import Flask, session, url_for, redirect, request, abort, jsonify
 from CarDao import carDao
 
+
 app = Flask(__name__, static_url_path='', static_folder='staticpages')
+app.secret_key = 'secretoputbhd6wm'
 
 @app.route('/')
 def index():

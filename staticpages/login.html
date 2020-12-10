@@ -55,6 +55,11 @@
 		h3, ul, p{
 			font-family: Calibri;
 			font-size: 150%;}
+        
+        .login{
+			float: left;
+			width: 16%;
+			height: 220px;}
 		
 					
 	</style>
@@ -64,8 +69,6 @@
     	<img src="Images/Logo.PNG" alt="Logo" Width="50%"><br/>
 		<a href="index.html"><img src="Buttons/homeButton.jpg" alt="Homepage" Width="24%"></a>
 		<!-- Onclick below demonstrates use of events -->
-		<!--<a href="sales.html" onclick="return confirm('Please Login')"><img src="Buttons/salesButton.jpg" alt="Sales" Width="24%"></a>-->
-		<!--<a href="admin.html" onclick="return confirm('Please Login')"><img src="Buttons/adminButton.jpg" alt="Administration" Width="24%"></a>-->
 		<a href="sales.html"><img src="Buttons/salesButton.jpg" alt="Sales" Width="24%"></a>
 		<a href="admin.html"><img src="Buttons/adminButton.jpg" alt="Administration" Width="24%"></a>
 		<a href="contact.html"><img src="Buttons/contactButton.jpg" alt="Contact" Width="24%"></a>
@@ -73,7 +76,7 @@
 
 		<!-- Create a div to edit and position the quote using CSS contained in Head -->
 		<div class="quote">
-			<h3><i>"Welcome to MotorCity, the App server used to access all cars for sale under the MotorCity umbrella, with dealerships all around the country. All cars available for sale are listed below. To learn more about any car please login using the salesman login. To create, edit or delete cars from the list, please use the Administrator password"</i></h3>
+			<h3><i>"Welcome to MotorCity, Fuck away off the App server used to access all cars for sale under the MotorCity umbrella, with dealerships all around the country. All cars available for sale are listed below. To learn more about any car please login using the salesman login. To create, edit or delete cars from the list, please use the Administrator password"</i></h3>
 		</div>
 	
     	<!-- Create a div to position carparkPic using using float in CSS contained in Head -->
@@ -88,7 +91,27 @@
                 	<th>New/Used</th><th>Make</th><th>Model</th><th>Year</th><th>Fuel</th><th>Colour</th><th>Price</th><th>Supplier</th><th>Location</th><th>Phone</th>
             	</tr>
 			   </table>
-		</div>
+        </div>
+        
+
+        <!-- Create a div to position teamPic using using float in CSS contained in Head -->
+	<div class="login">
+		<form>
+			<fieldset style="width: 180px">
+				<legend>LOGIN</legend>
+			
+				<p>Email Address:
+				</br><input id="em" type="email"/>
+				</p>
+				<p>Password:
+				</br><input id="pwd" type="password"/>
+				</p>
+				<p><button type="button" onclick="validate()">LOGIN</button></p> <!-- Onclick demonstrates use of an event -->
+			</fieldset>
+		</form>			
+	</div>
+
+
 
 		<script>
 			
@@ -141,6 +164,8 @@
 
 			getAll()
 			//console.log("Working so far")
-		</script>
+        </script>
+        
+        
 	</body>
 </html>
