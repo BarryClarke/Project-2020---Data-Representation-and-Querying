@@ -19,7 +19,7 @@
 		.quote{
 			float: left;
 			width: 75%;
-			height: 200px;
+			height: 150px;
 			padding: 20px;
 			margin: 0px 20px 0px 0px;
             /*background-color: black;*/
@@ -33,15 +33,28 @@
             margin-top: 20px;
 			width: 16%;
 			height: 100px;}
-	 
-		/* caption is placed beneath the carparkPic on the RHS */
-		.caption{
-			text-align: center;
-            background-color: green;
-			font-family: Calibri;
-			font-size: 80%;
-			width: 100%;
-			color: green;}
+		
+		.form1{
+			float: left;
+            /*background-color: blue;*/
+			padding-left: 20px;
+            margin-top: 20px;
+			width: 25%;
+			height: 50px;}
+		
+		.form2{
+			float: left;
+            /*background-color: red;*/
+            margin-top: 20px;
+			width: 25%;
+			height: 50px;}
+		
+		.form3{
+			float: left;
+            /*background-color: green;*/
+            margin-top: 20px;
+			width: 25%;
+			height: 50px;}
 		
 		/* intro contains the main body text of the page. Positioned beneath quote using clear */
 		.display{
@@ -80,6 +93,39 @@
     	<div class="carparkPic">
 			<img src="Images/carParkpic.jpg" alt="carpark" width="100%" title="cars for sale"> 	
 		</div>
+
+		<div class="form1">
+			<form>
+				search by New/Used <select name=kind>
+					<option value="New">New</option>
+					<option value="Used">Used</option>
+				</select>
+				<button onclick="findByKind(this.value)">Go</button>
+			</form>
+		</div>
+
+		<div class="form2">
+			<form>
+				search by Model <select name=model>
+					<option value="TOY">Toyota</option>
+					<option value="FOR">Ford</option>
+				</select>
+				<button onclick="findByModel(this.value)">Go</button>
+			</form>
+		</div>
+
+		<div class="form2">
+			<form>
+				search by Location <select name=location>
+					<option value="Dundalk">Dundalk</option>
+					<option value="Droghed">Drogheda</option>
+					<option value="Swords">Swords</option>
+				</select>
+				<button onclick="findByLocation(this.value)">Go</button>
+			</form>
+		</div>
+
+
 	
 		<!-- Create a div to position intro using using clear in CSS contained in Head -->
 		<div class="display">
@@ -89,6 +135,8 @@
             	</tr>
 			   </table>
 		</div>
+	</body>
+		
 
 		<script>
 			
@@ -96,7 +144,7 @@
 			
     		function getAll(){
         		$.ajax({
-            		"url": "http://127.0.0.1:5000/cars", //This url is used to call a specific function in the restfull API
+            		"url": "http://127.0.0.1:5000/cars", //This url is used to call a specific function in the restful API
             		"method": "GET",
             		"data": "",
             		"dataType": "JSON",
@@ -118,29 +166,75 @@
 
         		rowElement.id = car.kind
         		var cell1 = rowElement.insertCell(0) // Declare and insert a cell as the 1st cell in the row
-        		cell1.innerHTML = car.kind // In this cell, assign what is stored in the car object for "reg"
+        		cell1.innerHTML = car.kind // In this cell, assign what is stored in the car object for "kind"
         		var cell2 = rowElement.insertCell(1) // Declare and insert a cell as the 2nd cell in the row
-        		cell2.innerHTML = car.manu_code // In this cell, assign what is stored in the car object for "make"
+        		cell2.innerHTML = car.manu_code // In this cell, assign what is stored in the car object for "manufacturer"
         		var cell3 = rowElement.insertCell(2) // Declare and insert a cell as the 3rd cell in the row
         		cell3.innerHTML = car.manu_model // In this cell, assign what is stored in the car object for "model"
         		var cell4 = rowElement.insertCell(3) // Declare and insert a cell as the 4th cell in the row
-        		cell4.innerHTML = car.year // In this cell, assign what is stored in the car object for "price"
+        		cell4.innerHTML = car.year // In this cell, assign what is stored in the car object for "year"
         		var cell5 = rowElement.insertCell(4) // Declare and insert a cell as the 5th cell in the row
-        		cell5.innerHTML = car.fuel // In this cell, assign what is stored in the car object for "price"
+        		cell5.innerHTML = car.fuel // In this cell, assign what is stored in the car object for "fuel"
         		var cell6 = rowElement.insertCell(5) // Declare and insert a cell as the 5th cell in the row
-    			cell6.innerHTML = car.colour // In this cell, assign what is stored in the car object for "price"
+    			cell6.innerHTML = car.colour // In this cell, assign what is stored in the car object for "colour"
 				var cell7 = rowElement.insertCell(6) // Declare and insert a cell as the 5th cell in the row
         		cell7.innerHTML = car.price // In this cell, assign what is stored in the car object for "price"
 				var cell8 = rowElement.insertCell(7) // Declare and insert a cell as the 5th cell in the row
-        		cell8.innerHTML = car.name // In this cell, assign what is stored in the car object for "price"
+        		cell8.innerHTML = car.name // In this cell, assign what is stored in the car object for "name"
 				var cell9 = rowElement.insertCell(8) // Declare and insert a cell as the 5th cell in the row
-        		cell9.innerHTML = car.location // In this cell, assign what is stored in the car object for "price"
+        		cell9.innerHTML = car.location // In this cell, assign what is stored in the car object for "location"
 				var cell10 = rowElement.insertCell(9) // Declare and insert a cell as the 5th cell in the row
-        		cell10.innerHTML = car.phone // In this cell, assign what is stored in the car object for "price"
+        		cell10.innerHTML = car.phone // In this cell, assign what is stored in the car object for "phone"
     		}
 
-			getAll()
+			function findByKind(selected_value){
+        		$.ajax({
+            		"url": "http://127.0.0.1:5000/cars/kind/selected_value", //This url is used to call a specific function in the restful API
+            		"method": "GET",
+            		"data": "",
+            		"dataType": "JSON",
+            		"success":function(results){
+                		for (car of results)
+                    		addCarToTable(car) // Call a function to add car to the table
+            		},
+            		"error":function(xhr, status, error){
+                		console.log("error:"+status+" msg: "+error)
+            		}
+        		});
+    		}
+
+    		// Function to add new car to the table
+    		function addCarToTable(car){
+				console.log("Working so far")
+				
+        		var tableElement = document.getElementById('carTable') // Declare a variable tableElement which is the carTable
+        		var rowElement = tableElement.insertRow(-1) // Declare a variable rowElement which is a new row at the end (-1) of the table
+
+        		rowElement.id = car.kind
+        		var cell1 = rowElement.insertCell(0) // Declare and insert a cell as the 1st cell in the row
+        		cell1.innerHTML = car.kind // In this cell, assign what is stored in the car object for "kind"
+        		var cell2 = rowElement.insertCell(1) // Declare and insert a cell as the 2nd cell in the row
+        		cell2.innerHTML = car.manu_code // In this cell, assign what is stored in the car object for "manufacturer"
+        		var cell3 = rowElement.insertCell(2) // Declare and insert a cell as the 3rd cell in the row
+        		cell3.innerHTML = car.manu_model // In this cell, assign what is stored in the car object for "model"
+        		var cell4 = rowElement.insertCell(3) // Declare and insert a cell as the 4th cell in the row
+        		cell4.innerHTML = car.year // In this cell, assign what is stored in the car object for "year"
+        		var cell5 = rowElement.insertCell(4) // Declare and insert a cell as the 5th cell in the row
+        		cell5.innerHTML = car.fuel // In this cell, assign what is stored in the car object for "fuel"
+        		var cell6 = rowElement.insertCell(5) // Declare and insert a cell as the 5th cell in the row
+    			cell6.innerHTML = car.colour // In this cell, assign what is stored in the car object for "colour"
+				var cell7 = rowElement.insertCell(6) // Declare and insert a cell as the 5th cell in the row
+        		cell7.innerHTML = car.price // In this cell, assign what is stored in the car object for "price"
+				var cell8 = rowElement.insertCell(7) // Declare and insert a cell as the 5th cell in the row
+        		cell8.innerHTML = car.name // In this cell, assign what is stored in the car object for "name"
+				var cell9 = rowElement.insertCell(8) // Declare and insert a cell as the 5th cell in the row
+        		cell9.innerHTML = car.location // In this cell, assign what is stored in the car object for "location"
+				var cell10 = rowElement.insertCell(9) // Declare and insert a cell as the 5th cell in the row
+        		cell10.innerHTML = car.phone // In this cell, assign what is stored in the car object for "phone"
+    		}
+
+			//getAll()
 			//console.log("Working so far")
 		</script>
-	</body>
+	<!--</body>-->
 </html>

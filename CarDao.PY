@@ -222,7 +222,4 @@ class CarDao:
                 car[colName] = value
         return car
 
-
-
-
 carDao = CarDao()

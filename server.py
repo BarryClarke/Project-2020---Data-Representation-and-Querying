@@ -1,13 +1,62 @@
-from flask import Flask, session, url_for, redirect, request, abort, jsonify
+from flask import Flask, session, url_for, request, redirect, abort, jsonify
 from CarDao import carDao
 
 
 app = Flask(__name__, static_url_path='', static_folder='staticpages')
-app.secret_key = 'secretoputbhd6wm'
+#app.secret_key = 'thissecretkey'
 
 @app.route('/')
 def index():
-    return "hello"
+    return redirect('index.html')
+
+# Below is a failed attempt at logging in
+# ----------------------------------------------------------------------------------------------------------------------------------
+#@app.route('/sales.html')
+#def home():
+#    if not 'username' in session:
+#        return redirect('saleslogin')
+    #return redirect('login.html')
+#    return 'welcome ' + session['username'] +\
+#        '<br><a href="'+url_for('logout')+'">logout</a>'
+
+#@app.route('/saleslogin')
+#def login():
+#    return '<form>'+\
+#			    '<fieldset style="width: 180px">'+\
+#				    '<legend>LOGIN</legend>'+\
+#				    '<p>Email Address:'+\
+#				    '</br><input id="username" type="text"/>'+\
+#				    '</p>'+\
+#				    '<p>Password:'+\
+#				    '</br><input id="password" type="password"/>'+\
+#				    '</p>'+\
+#				    '<button>'+\
+#                        '<a>'+\
+#                            'login'+\
+#                        '</a>' +\
+#                    '</button>'+\
+#			    '</fieldset>'+\
+#		    '</form>
+
+#@app.route('/processlogin')
+#def proccess_login():
+    #check credentials
+    #if bad redirect to login page again
+    #if session['username'] == andrew:
+    #    if session['password'] == data:
+    #        return redirect(url_for('home'))
+
+
+    #else:
+    #session['username']="I dunno"
+     
+     #   return redirect('sales.html')
+
+#@app.route('/logout')
+#def logout():
+#    session.pop('username',None)
+#    return redirect('index.html')
+# ------------------------------------------------------------------------------------------------------------------------------
 
 # Read operations
 # Read Cars
